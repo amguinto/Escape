@@ -9,6 +9,7 @@ public class EscapeTarget : TargetRules
 	{
 		Type = TargetType.Game;
 
-		ExtraModuleNames.AddRange( new string[] { "Escape" } );
+		//ExtraModuleNames.AddRange( new string[] { "Escape" } );
+        ExtraModuleNames.Add("Escape");
 	}
 }

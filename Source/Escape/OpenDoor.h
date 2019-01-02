@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "Components/ActorComponent.h"
 #include "Engine/TriggerVolume.h"
+#include "Gameframework/Actor.h"
 #include "OpenDoor.generated.h"
 
 
@@ -22,6 +23,8 @@ protected:
 	virtual void BeginPlay() override;
     
     void OpenDoor();
+    void CloseDoor();
+    
 public:	
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
@@ -29,13 +32,27 @@ public:
 private:
     // Indicates that this property is visible in property windows (In UE4), but cannot be edited at all
     // Under OpenDoor In Details
-    
-    UPROPERTY(VisibleAnywhere)
-    float openAngle = 90.0f;
 
     UPROPERTY(EditAnywhere)
     ATriggerVolume* pressurePlate;
     
     UPROPERTY(VisibleAnywhere)
     AActor* actorThatOpens; // Pawn inherits from Actor
+    
+    
+    // Door Variables
+    UPROPERTY(EditAnywhere)
+    float openAngle = -90.0f;
+    
+    UPROPERTY(EditAnywhere)
+    float doorCloseDelay = 0.5f;
+    
+    AActor* Owner; // The Owning Door
+    
+    float lastDoorOpenTime;
+    
+    bool doorIsOpen;
+    
+    FRotator openRotation = FRotator(0.0f, openAngle, 0.0f);
+    FRotator closedRotation = FRotator(0.0f, -openAngle, 0.0f);
 };

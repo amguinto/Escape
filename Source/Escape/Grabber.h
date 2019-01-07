@@ -27,10 +27,12 @@ private:
     // How far ahead of the player we can reach in cm
     float reach = 100.0f;
     
-    FVector PlayerViewPointLocation;
-    FRotator PlayerViewPointRotation;
-    
-    FVector LineTraceEnd;
+    // Player position and line of sight
+    FVector playerViewPointLocation;
+    FRotator playerViewPointRotation;
+    FVector lineTraceEnd;
 		
-	
+	// Ray Cast Variables
+    FHitResult hit;
+    
 };

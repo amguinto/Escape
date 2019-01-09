@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "Components/ActorComponent.h"
+#include "PhysicsEngine/PhysicsHandleComponent.h"
 #include "Grabber.generated.h"
 
 
@@ -35,4 +36,6 @@ private:
 	// Ray Cast Variables
     FHitResult hit;
     
+    // Physics Handler in DefaultPawn_BP
+    UPhysicsHandleComponent* physicsHandle = nullptr;
 };

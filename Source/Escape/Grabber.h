@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "Components/ActorComponent.h"
 #include "PhysicsEngine/PhysicsHandleComponent.h"
+#include "Components/InputComponent.h"
 #include "Grabber.generated.h"
 
 
@@ -38,4 +39,9 @@ private:
     
     // Physics Handler in DefaultPawn_BP
     UPhysicsHandleComponent* physicsHandle = nullptr;
+    
+    UInputComponent* inputComponent = nullptr;
+    
+    // Ray-cast and grab what is in reach
+    void Grab();
 };

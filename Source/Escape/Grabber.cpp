@@ -41,6 +41,10 @@ void UGrabber::BeginPlay()
         
         // Bind the input action
         inputComponent->BindAction("Grab", IE_Pressed, this, &UGrabber::Grab);
+        
+        // Pressing the Grab button again will release
+        inputComponent->BindAction("Grab", IE_Released, this, &UGrabber::Release);
+
     }
     else
     {
@@ -51,7 +55,13 @@ void UGrabber::BeginPlay()
 
 void UGrabber::Grab()
 {
-    UE_LOG(LogTemp, Warning, TEXT("Grab Key Pressed"), *GetOwner()->GetName());
+    UE_LOG(LogTemp, Warning, TEXT("Grab Pressed"), *GetOwner()->GetName());
+
+}
+
+void UGrabber::Release()
+{
+    UE_LOG(LogTemp, Warning, TEXT("Grab Released"), *GetOwner()->GetName());
 
 }
 

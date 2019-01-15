@@ -37,7 +37,7 @@ private:
     ATriggerVolume* pressurePlate;
     
     UPROPERTY(VisibleAnywhere)
-    AActor* actorThatOpens; // Pawn inherits from Actor
+    // AActor* actorThatOpens; // Pawn inherits from Actor
     
     
     // Door Variables
@@ -55,4 +55,7 @@ private:
     
     FRotator openRotation = FRotator(0.0f, openAngle, 0.0f);
     FRotator closedRotation = FRotator(0.0f, -openAngle, 0.0f);
+    
+    // Returns total mass in kg
+    float GetTotalMassOfActorsOnPlate()
 };

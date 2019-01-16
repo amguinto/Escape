@@ -1,6 +1,7 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "OpenDoor.h"
+#include "Engine/TriggerVolume.h"
 #include "Gameframework/Actor.h"
 
 #define OUT
@@ -44,7 +45,7 @@ void UOpenDoor::TickComponent(float DeltaTime, ELevelTick TickType, FActorCompon
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
 	// Poll the Trigger Volume
-    if (GetTotalMassOfActorsOnPlate() > 50.f)
+    if (GetTotalMassOfActorsOnPlate() > 20.f)
     {
         OpenDoor();
         lastDoorOpenTime = GetWorld()->GetTimeSeconds();
@@ -64,7 +65,15 @@ float UOpenDoor::GetTotalMassOfActorsOnPlate()
     
     // Find all the overlapping actors
     pressurePlate->GetOverlappingActors(OUT overlappingActors);
+    
     // Iterate through them adding their masses
+    for(const auto *Actor : overlappingActors)
+    {
+        // Log found actors
+        // UE4 way of finding mass
+        totalMass += Actor->FindComponentByClass<UPrimitiveComponent>()->GetMass();
+        // UE_LOG(LogTemp, Warning, TEXT("%s on the pressure plate."), Actor->GetName());
+    }
     
     return totalMass;
 }

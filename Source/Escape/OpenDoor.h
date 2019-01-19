@@ -34,10 +34,10 @@ private:
     // Under OpenDoor In Details
 
     UPROPERTY(EditAnywhere)
-    ATriggerVolume* pressurePlate;
+    ATriggerVolume* pressurePlate = nullptr;
     
     UPROPERTY(VisibleAnywhere)
-    AActor* actorThatOpens; // Pawn inherits from Actor
+    AActor* actorThatOpens = nullptr; // Pawn inherits from Actor
     
     
     // Door Variables
@@ -47,7 +47,7 @@ private:
     UPROPERTY(EditAnywhere)
     float doorCloseDelay = 0.5f;
     
-    AActor* Owner; // The Owning Door
+    AActor* Owner = nullptr; // The Owning Door
     
     float lastDoorOpenTime;
     

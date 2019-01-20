@@ -34,7 +34,8 @@ void UOpenDoor::BeginPlay()
 
 void UOpenDoor::OpenDoor() {
     
-    Owner->SetActorRotation(openRotation);
+    // Owner->SetActorRotation(openRotation);
+    onOpenRequest.Broadcast();
     doorIsOpen = true;
 }
 

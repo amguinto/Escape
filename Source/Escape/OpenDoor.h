@@ -8,6 +8,9 @@
 #include "Gameframework/Actor.h"
 #include "OpenDoor.generated.h"
 
+// Used to declare BluePrint in C++
+DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnOpenRequest);
+
 
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
 class ESCAPE_API UOpenDoor : public UActorComponent
@@ -28,7 +31,10 @@ protected:
 public:	
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
-
+    
+    // Blueprint Variable
+    UPROPERTY(BlueprintAssignable)
+    FOnOpenRequest onOpenRequest;
 private:
     // Indicates that this property is visible in property windows (In UE4), but cannot be edited at all
     // Under OpenDoor In Details

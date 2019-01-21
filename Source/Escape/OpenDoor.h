@@ -9,7 +9,7 @@
 #include "OpenDoor.generated.h"
 
 // Used to declare BluePrint in C++
-DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnOpenRequest);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE(FDoorEvent);
 
 
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
@@ -25,16 +25,17 @@ protected:
 	// Called when the game starts
 	virtual void BeginPlay() override;
     
-    void OpenDoor();
-    void CloseDoor();
-    
 public:	
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
     
     // Blueprint Variable
     UPROPERTY(BlueprintAssignable)
-    FOnOpenRequest onOpenRequest;
+    FDoorEvent onOpen;
+    
+    UPROPERTY(BlueprintAssignable)
+    FDoorEvent onClose;
+    
 private:
     // Indicates that this property is visible in property windows (In UE4), but cannot be edited at all
     // Under OpenDoor In Details
@@ -45,23 +46,16 @@ private:
     UPROPERTY(VisibleAnywhere)
     AActor* actorThatOpens = nullptr; // Pawn inherits from Actor
     
-    
-    // Door Variables
-    UPROPERTY(EditAnywhere)
-    float openAngle = -90.0f;
-    
-    UPROPERTY(EditAnywhere)
-    float doorCloseDelay = 0.5f;
-    
     AActor* Owner = nullptr; // The Owning Door
-    
-    float lastDoorOpenTime;
     
     bool doorIsOpen;
     
-    FRotator openRotation = FRotator(0.0f, openAngle, 0.0f);
-    FRotator closedRotation = FRotator(0.0f, -openAngle, 0.0f);
+    FRotator openRotation = FRotator(0.0f, 90.0f, 0.0f);
+    FRotator closedRotation = FRotator(0.0f, -90.0f, 0.0f);
     
     // Returns total mass in kg
     float GetTotalMassOfActorsOnPlate();
+    
+    UPROPERTY(EditAnywhere)
+    float triggerMass = 20.f;
 };
